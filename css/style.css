@@ -1,0 +1,371 @@
+:root {
+    /* Typography */
+    --font-size: 1rem;
+    --font-family: 'Mona Sans', sans-serif;
+
+    --theme-fade: 0s;      /* 0s = instant switch. Set to .125s for a fade. */
+    --line-height: 1;
+    --line-height-content: 1.75;
+
+    /* Type Scale Variables */
+    --font-size-h1: 2.986rem;
+    --font-size-h2: 1.728rem;
+    --font-size-h3: 1.44rem;
+    --font-size-h4: 1.2rem;
+    --font-size-h5: 1.44rem;
+    --font-size-h6: 1.2rem;
+    --font-size-p: 1rem;
+    --font-size-small: 0.833rem;
+    --font-size-xs: 0.694rem;
+
+    /* Colors - Light Theme */
+    --text-color: #1f1f1f; 
+    --bkg-color: #fafafa;
+    --bkg-color-transparent: #fafafa00;
+    --anchor-link-color: #0066cc;
+    --anchor-visited-color: #7B68EE;
+    --anchor-hover-color: #666666;
+    
+    /* Softened Slate Borders */
+    --border-color: #d1d5db; 
+    --code-bg-color: #f3f4f6;
+    --code-text-color: #2d2d2d;
+    
+    /* Cool Slate Greys */
+    --text-color-secondary: #5f6368; 
+    --text-color-tertiary: #878d96; 
+    --border-color-light: #e5e7eb;
+
+    /* Header Button Colors */
+    --header-btn-bg: var(--bkg-color);
+    --header-btn-bg-hover: var(--text-color);
+    --header-btn-text: var(--text-color);
+    --header-btn-text-hover: var(--bkg-color);
+    --header-btn-border: var(--border-color); 
+    --header-btn-border-hover: var(--text-color); 
+
+    /* Spacing */
+    --space-xxs: 0.2rem;
+    --space-xs: 0.4rem;
+    --space-sm: 0.5rem;
+    --space-md-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 2.5rem;
+    --space-3xl: 3rem;
+    --space-4xl: 4rem;
+
+    /* Defaults */
+    --padding: 0px;
+    --margin: 0px;
+    --padding-left: var(--space-xl);
+
+    font-size: var(--font-size);
+}
+
+/* --- GLOBAL STYLES & THEME DEFINITIONS --- */
+body {
+    font-family: var(--font-family);
+    line-height: var(--line-height);
+    font-weight: 300;
+    color: var(--text-color);
+    background-color: var(--bkg-color);
+    box-sizing: border-box;
+    padding: 0;
+    margin: var(--margin);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+html.dark-theme {
+    --text-color: #f8f8f8;
+    --bkg-color: #131314; 
+    --bkg-color-transparent: #13131400;
+    --anchor-link-color: #66a3ff;
+    --anchor-visited-color: #a394ff;
+    --anchor-hover-color: #9ca3af;
+    
+    /* Receding Slate Borders */
+    --border-color: #374151; 
+    --code-bg-color: #1f2937;
+    --code-text-color: #e5e7eb;
+    
+    /* Cool Slate Greys */
+    --text-color-secondary: #9ca3af; 
+    --text-color-tertiary: #6b7280; 
+    --border-color-light: #1f2937;
+    
+    --header-btn-bg: #131314; 
+    --header-btn-bg-hover: #f8f8f8; 
+    --header-btn-text: #f8f8f8; 
+    --header-btn-text-hover: #131314; 
+    --header-btn-border: #374151; 
+    --header-btn-border-hover: #6b7280; 
+}
+
+/* Utilities */
+[hidden] { display: none !important; }
+
+/* --- CORE LAYOUT COMPONENTS --- */
+.container { 
+    font-family: var(--font-family);
+    padding: var(--space-md-sm) var(--padding-left);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* The theme switch, on one knob: --theme-fade.
+   It is 0s — instant — on purpose. A fade cannot be made to LOOK even across
+   this page whatever duration you choose, because the elements travel different
+   distances: body copy runs almost the full range (#1f1f1f to #f8f8f8) and
+   spends that time crossing visible mid-greys, while the name moves between two
+   similar greys (#878d96 to #6b7280) and appears to change instantly. Same
+   125ms, very different-looking journeys. Snapping everything is the only way
+   to make it uniform by construction. */
+*, *::before, *::after {
+    transition: color var(--theme-fade), background-color var(--theme-fade),
+                border-color var(--theme-fade), text-decoration-color var(--theme-fade);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+/* --- GENERAL TYPOGRAPHY --- */
+p {
+    font-size: var(--font-size-p);
+    line-height: var(--line-height-content);
+    font-weight: 400;
+    margin: 0 0 var(--space-lg) 0;
+    padding: 0;
+}
+
+.main-content p.intro-text { font-size: var(--font-size-h3); }
+
+small { font-size: var(--font-size-p); } 
+
+i, em { font-style: italic; }
+strong, b { font-weight: 700; }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family);
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0; 
+}
+h1 { font-size: var(--font-size-h1); letter-spacing: -0.02em; margin-bottom: var(--space-lg); line-height: 1.125; }
+h2 { font-size: var(--font-size-h2); margin: var(--space-xl) 0 var(--space-md) 0; }
+h3 { font-size: var(--font-size-h3); line-height: 1.5; margin: var(--space-lg) 0 var(--space-sm) 0; }
+h4 { font-size: var(--font-size-h4); margin: var(--space-md) 0 var(--space-xs) 0; }
+h5 { font-size: var(--font-size-h5); margin: var(--space-md) 0 var(--space-xs) 0; }
+h6 { font-size: var(--font-size-h6); margin: var(--space-md) 0 var(--space-xs) 0; }
+
+/* --- LINKS (Global Styling) --- */
+a,
+a:link {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.25rem;
+    text-decoration-color: var(--text-color-secondary);
+}
+
+a:visited {
+    color: var(--text-color);
+    text-decoration-color: var(--text-color-secondary);
+}
+
+a:hover {
+    color: var(--anchor-link-color);
+    text-decoration-color: var(--anchor-link-color);
+}
+
+a:focus-visible {
+    color: var(--text-color);
+    text-decoration-color: var(--anchor-link-color);
+    outline: 2px solid var(--anchor-link-color);
+    outline-offset: 0.2em;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+}
+
+/* --- HEADER BUTTONS --- */
+.header-btn {
+    background: var(--header-btn-bg);
+    border: none; 
+    color: var(--header-btn-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-h6); 
+    font-weight: 400; 
+    cursor: pointer;
+    padding: var(--space-xxs) var(--space-sm); 
+    margin: 0;
+    border-radius: 2px;
+    text-decoration: none; 
+    display: inline-block; 
+    line-height: 1.37; 
+    white-space: nowrap; 
+    -webkit-transition: background-color var(--theme-fade), color var(--theme-fade);
+    transition: background-color var(--theme-fade), color var(--theme-fade);
+}
+
+a.header-btn,
+a.header-btn:visited { text-decoration: none; color: var(--header-btn-text); }
+
+.header-btn:hover,
+a.header-btn:hover { 
+    background: var(--header-btn-bg-hover);
+    color: var(--header-btn-text-hover);
+    text-decoration: none;
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+.header-btn:focus-visible,
+a.header-btn:focus-visible { 
+    outline: 2px solid var(--anchor-link-color);
+    outline-offset: 0.2em;
+    background: var(--header-btn-bg-hover);
+    color: var(--header-btn-text-hover);
+    text-decoration: none;
+}
+
+.theme-toggle { cursor: pointer; }
+
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--anchor-link-color);
+  outline-offset: 0.2em;
+}
+
+.theme-toggle:focus-visible,
+
+/* --- DIRECTORY INDEX PAGE STYLES --- */
+.card { 
+    border-top: 1px dashed var(--border-color);
+    padding-top: var(--space-md);
+    padding-bottom: 1.2rem;
+    margin: 0;
+}
+
+.card:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+/* Soft Spotlight: Cards drop in opacity but retain their cool temperature */
+
+#work-grid { 
+    margin-bottom: 6rem; 
+}
+
+#work-grid .card h2 { 
+    font-size: var(--font-size-h6); 
+    margin-top: 0; 
+    margin-bottom: var(--space-sm); 
+    line-height: 1.3; 
+    font-weight: 400;
+    position: relative;
+    padding-left: var(--space-lg);
+}
+
+#work-grid .card h2 a {
+    font-size: var(--font-size-h6);
+}
+
+/* Hover bullet replaced with + */
+
+
+/* --- FOOTER --- */
+.footGrid {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 100;
+    background: linear-gradient(to top, var(--bkg-color) 40%, var(--bkg-color-transparent) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--space-lg) var(--padding-left);
+    padding-top: var(--space-3xl); 
+    pointer-events: none;
+}
+
+.footGrid > * {
+    pointer-events: auto;
+}
+
+/* The footer is space-between, so the two cells sit at the ends on their own;
+   these only centre their contents vertically. */
+.footGrid #cell1, .footGrid #cell3 { display: flex; align-items: center; }
+
+.footGrid #cell1 small {
+    font-family: var(--font-family);   
+    font-size: var(--font-size-p); 
+    font-weight: 400;                
+}
+
+/* A11Y: hide visually, keep for screen readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+/* ── One page, set as type ──────────────────────────────────────────────
+   The statement is the headline and the name is a label: on a page with one
+   idea, "I build accessible colour systems" is the content and "Eddie Demo"
+   is the byline. Sizing them identically — which is what the card styles did
+   — left the top of the page with no hierarchy at all.                      */
+
+#work-grid {
+    /* 500px of TEXT: .container adds 2rem of padding each side with border-box,
+       so the box has to be 564px to give a 500px measure (~62 characters). */
+    max-width: 564px;
+    margin-top: 4rem;          /* ranged left, as before — the measure was the problem, not the position */
+}
+
+/* No indent: the left padding on a card heading existed to make room for the
+   +/• accordion marker, and there is no accordion here to mark.             */
+/* The name sits at body size and weight: a byline, not a banner. The page has
+   one idea and the statement below carries it. */
+#work-grid .card h2 {
+    padding-left: 0;
+    font-size: var(--font-size-p);
+    font-weight: 400;
+    line-height: var(--line-height-content);
+    color: var(--text-color-tertiary);
+    margin-bottom: var(--space-2xl);
+}
+#work-grid .card h2::before { content: none; }
+
+#work-grid .card .lead {
+    font-size: var(--font-size-h3);
+    line-height: 1.35;
+    text-wrap: balance;        /* no widow on the one line that matters most */
+    margin-top: 0;
+    margin-bottom: var(--space-2xl);
+    color: var(--text-color);
+}
+
+#work-grid .card p { text-wrap: pretty; }
+
+#work-grid .card .contact {
+    margin-top: var(--space-2xl);
+    color: var(--text-color-secondary);
+}
+

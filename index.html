@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Eddie Demo — a graphic designer in Bristol building accessible colour systems for organisations that have to meet WCAG.">
+  <title>Eddie Demo — accessible colour systems, Bristol</title>
+  <link rel="canonical" href="https://eddiedemo.com/">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Eddie Demo — accessible colour systems, Bristol">
+  <meta property="og:description" content="I check brand colours against every contrast requirement in WCAG 2.2, then design the corrections. The brand stays recognisable; the colours start passing.">
+  <meta property="og:url" content="https://eddiedemo.com/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Eddie Demo — accessible colour systems, Bristol">
+  <meta name="twitter:description" content="I check brand colours against every contrast requirement in WCAG 2.2, then design the corrections.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eddie Demo",
+    "url": "https://eddiedemo.com/",
+    "email": "eddie@eddiedemo.com",
+    "jobTitle": "Graphic designer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Bristol", "addressCountry": "GB" },
+    "knowsAbout": ["Colour systems", "Web accessibility", "WCAG", "Design systems", "Graphic design"]
+  }
+  </script>
+
+  <script>
+    /* Inline and before the stylesheet on purpose: this has to run before the first
+       paint, or a dark-mode visitor sees a white page flash first. A deferred script
+       would be far too late. Order of preference: a choice the visitor has made here,
+       then whatever their device is set to. */
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      var dark = stored ? stored === 'dark'
+        : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) document.documentElement.classList.add('dark-theme');
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+  <link rel="shortcut icon" type="image/png" href="./images/demoFav16_32x32-01.png">
+  <link rel="icon" type="image/png" href="./images/demoFav16_32x32-01.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <h1 class="visually-hidden">Eddie Demo — accessible colour systems, Bristol</h1>
+
+  <main id="work-grid" class="container">
+
+    <article class="card" id="about">
+      <h2>Eddie Demo</h2>
+      <p class="lead">Graphic designer, Bristol. I build accessible colour systems.</p>
+
+      <p>Twelve years designing for B2B and professional services, with an educational background
+      in fine art, graphic design and data analytics. I work with organisations that have to meet
+      WCAG — housing associations, colleges, charities, and the agencies that build for them.</p>
+
+      <p>Brand palettes get drawn before anyone asks what the colours have to <em>do</em>: carry
+      body text, sit behind a button, mark a link. Some of them can't, and nobody finds out until
+      someone complains.</p>
+
+      <p>I check a brand's colours against every contrast requirement in WCAG 2.2, using a tool I
+      built for it, then design the corrections. The brand stays recognisable.</p>
+
+      <p class="contact">Send me a link or a list of hex values and I'll tell you what I find.<br>
+      <a href="mailto:eddie@eddiedemo.com">eddie@eddiedemo.com</a></p>
+    </article>
+
+  </main>
+
+  <footer class="container footGrid">
+    <div id="cell1"><small>© 2026</small></div>
+    <div id="cell3">
+      <button id="theme-toggle" class="theme-toggle header-btn" aria-label="Toggle dark mode"></button>
+    </div>
+  </footer>
+
+  <script src="js/theme.js" defer></script>
+</body>
+</html>
