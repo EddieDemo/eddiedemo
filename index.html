@@ -54,6 +54,12 @@
 <body>
   <h1 class="visually-hidden">Eddie Demo — accessible colour systems, Bristol</h1>
 
+  <!-- The page does not scroll; this does. iOS Safari collapses its toolbar when the
+       document scrolls and reveals a strip above the layout viewport that fixed elements
+       cannot reach — text was showing through above the header feather. With the document
+       fixed in place the toolbar stays put, the two viewports stay identical, and the
+       feathers cover exactly what they appear to cover. -->
+  <div class="scroll" role="region" aria-label="Page content" tabindex="0">
   <main id="work-grid" class="container">
 
     <article class="card" id="about">
@@ -76,6 +82,7 @@
     </article>
 
   </main>
+  </div>
 
   <footer class="container footGrid">
     <div id="cell1"><small>© 2026</small></div>

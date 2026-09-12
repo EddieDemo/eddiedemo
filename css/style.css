@@ -74,7 +74,8 @@ body {
     box-sizing: border-box;
     padding: 0;
     margin: var(--margin);
-    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;            /* the document is static; .scroll does the scrolling */
     display: flex;
     flex-direction: column;
 }
@@ -263,9 +264,7 @@ textarea:focus-visible {
 
 /* Soft Spotlight: Cards drop in opacity but retain their cool temperature */
 
-#work-grid { 
-    margin-bottom: 6rem; 
-}
+
 
 #work-grid .card h2 { 
     font-size: var(--font-size-h6); 
@@ -283,6 +282,23 @@ textarea:focus-visible {
 
 /* Hover bullet replaced with + */
 
+
+/* --- THE SCROLLER --- */
+.scroll {
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;   /* bounce stays inside, under the feathers */
+}
+.scroll:focus-visible { outline: 2px solid var(--anchor-link-color); outline-offset: -2px; }
+
+/* Print: nothing fixed, nothing clipped — a static page like any other */
+@media print {
+    html, body { height: auto; overflow: visible; }
+    .scroll { position: static; overflow: visible; }
+    html::before, body::before, .footGrid { display: none; }
+}
 
 /* --- HEADER FEATHER --- */
 /* Two layers, not one gradient.
@@ -371,7 +387,8 @@ body::before {
     /* 500px of TEXT: .container adds 2rem of padding each side with border-box,
        so the box has to be 564px to give a 500px measure (~62 characters). */
     max-width: 564px;
-    margin-top: calc(4rem + env(safe-area-inset-top, 0px));          /* ranged left, as before — the measure was the problem, not the position */
+    margin-top: calc(4rem + env(safe-area-inset-top, 0px));   /* clear of the opaque band */
+    margin-bottom: calc(8rem + env(safe-area-inset-bottom, 0px)); /* and the last line clears the footer */
 }
 
 /* No indent: the left padding on a card heading existed to make room for the
