@@ -295,8 +295,14 @@ body::before {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    height: calc(var(--space-3xl) + var(--space-lg) + (var(--font-size-p) * 1.37));
-    background: linear-gradient(to bottom, var(--bkg-color) 40%, var(--bkg-color-transparent) 100%);
+    /* Added to the Home Screen the page runs under the status bar, so the solid
+       end of the feather was hidden behind the clock and only its translucent
+       part was left covering the text. The inset grows the band, and the first
+       stop is pushed past the status bar so that region is fully opaque. */
+    height: calc(var(--space-3xl) + var(--space-lg) + (var(--font-size-p) * 1.37) + env(safe-area-inset-top, 0px));
+    background: linear-gradient(to bottom,
+        var(--bkg-color) calc(env(safe-area-inset-top, 0px) + 40%),
+        var(--bkg-color-transparent) 100%);
     pointer-events: none;
 }
 
@@ -305,14 +311,17 @@ body::before {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     z-index: 100;
-    background: linear-gradient(to top, var(--bkg-color) 40%, var(--bkg-color-transparent) 100%);
+    background: linear-gradient(to top,
+        var(--bkg-color) calc(env(safe-area-inset-bottom, 0px) + 40%),
+        var(--bkg-color-transparent) 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
     padding: var(--space-lg) var(--padding-left);
-    padding-top: var(--space-3xl); 
+    padding-top: var(--space-3xl);
+    padding-bottom: calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
     pointer-events: none;
 }
 
@@ -354,7 +363,7 @@ body::before {
     /* 500px of TEXT: .container adds 2rem of padding each side with border-box,
        so the box has to be 564px to give a 500px measure (~62 characters). */
     max-width: 564px;
-    margin-top: 4rem;          /* ranged left, as before — the measure was the problem, not the position */
+    margin-top: calc(4rem + env(safe-area-inset-top, 0px));          /* ranged left, as before — the measure was the problem, not the position */
 }
 
 /* No indent: the left padding on a card heading existed to make room for the
