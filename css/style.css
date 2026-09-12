@@ -285,24 +285,34 @@ textarea:focus-visible {
 
 
 /* --- HEADER FEATHER --- */
-/* The mirror of the footer: same gradient, same stops, same height, flipped.
-   A pseudo-element rather than a <header>, because there is nothing in it —
-   the markup would be an empty box existing only to be painted.
-   Height is the footer's own box arithmetic: its top padding, its bottom
-   padding, and one line of the copyright at its line-height. */
-body::before {
+/* Two layers, not one gradient.
+   A single gradient has to place its solid/fade boundary with arithmetic, and
+   that arithmetic has to include the status-bar inset when the page is opened
+   from the Home Screen — calc(env(...) + 40%) as a colour-stop position is not
+   reliably supported, and a gradient Safari cannot parse is a gradient it drops
+   entirely. So: a flat band that is simply opaque, and a separate fade beneath
+   it. Nothing to resolve, nothing to get wrong. */
+
+/* the opaque band: the status bar, plus a little */
+html::before {
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    /* Added to the Home Screen the page runs under the status bar, so the solid
-       end of the feather was hidden behind the clock and only its translucent
-       part was left covering the text. The inset grows the band, and the first
-       stop is pushed past the status bar so that region is fully opaque. */
-    height: calc(var(--space-3xl) + var(--space-lg) + (var(--font-size-p) * 1.37) + env(safe-area-inset-top, 0px));
-    background: linear-gradient(to bottom,
-        var(--bkg-color) calc(env(safe-area-inset-top, 0px) + 40%),
-        var(--bkg-color-transparent) 100%);
+    height: calc(env(safe-area-inset-top, 0px) + var(--space-3xl));
+    background: var(--bkg-color);
+    pointer-events: none;
+}
+
+/* the fade, hanging directly below it */
+body::before {
+    content: "";
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + var(--space-3xl));
+    left: 0; right: 0;
+    z-index: 100;
+    height: var(--space-2xl);
+    background: linear-gradient(to bottom, var(--bkg-color), var(--bkg-color-transparent));
     pointer-events: none;
 }
 
@@ -311,9 +321,7 @@ body::before {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     z-index: 100;
-    background: linear-gradient(to top,
-        var(--bkg-color) calc(env(safe-area-inset-bottom, 0px) + 40%),
-        var(--bkg-color-transparent) 100%);
+    background: linear-gradient(to top, var(--bkg-color) 60%, var(--bkg-color-transparent) 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
