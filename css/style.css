@@ -284,6 +284,22 @@ textarea:focus-visible {
 /* Hover bullet replaced with + */
 
 
+/* --- HEADER FEATHER --- */
+/* The mirror of the footer: same gradient, same stops, same height, flipped.
+   A pseudo-element rather than a <header>, because there is nothing in it —
+   the markup would be an empty box existing only to be painted.
+   Height is the footer's own box arithmetic: its top padding, its bottom
+   padding, and one line of the copyright at its line-height. */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: calc(var(--space-3xl) + var(--space-lg) + (var(--font-size-p) * 1.37));
+    background: linear-gradient(to bottom, var(--bkg-color) 40%, var(--bkg-color-transparent) 100%);
+    pointer-events: none;
+}
+
 /* --- FOOTER --- */
 .footGrid {
     position: fixed;
